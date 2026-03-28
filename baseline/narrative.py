@@ -1,3 +1,6 @@
+from model import gpt
+from model.gpt import get_llm_response_sys
+
 class Narration:
     def __init__(self, intention, tables, final_outline_int):
         self.intention = intention
@@ -75,6 +78,8 @@ class Narration:
         
         ### INPUT:\n### Tables:\n{self.tables}\n### Outline:\n{self.final_outline_int}\n### Previous Data Story:\n{narration_int}\n### Revision Plan:\n{narration_int_revision_plan}\n### OUTPUT:
         '''
+        print("---------------------------------------------------------")
+        print(f'narration_revision: {get_llm_response_sys(system_narration_revision_prompt, user_narration_revision_prompt)}')
         return get_llm_response_sys(system_narration_revision_prompt, user_narration_revision_prompt)
 
     def narration(self):

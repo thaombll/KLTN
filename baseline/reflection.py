@@ -1,3 +1,6 @@
+from model import gpt
+from model.gpt import get_llm_response_sys
+
 class Reflection:
     def __init__(self, tables):
         self.tables = tables
@@ -19,7 +22,7 @@ class Reflection:
             - The output must be in plain text and structured in bullet points.
             - Generate the response ‘reflection’ in between two <reflection> tags.
 
-            ### INPUT:\n### Tables:\n{tables}\n### OUTPUT:
+            ### INPUT:\n### Tables:\n{self.tables}\n### OUTPUT:
             '''
 
         # print("---------------------------------------------------------")
@@ -44,7 +47,7 @@ class Reflection:
             - The output must be in plain text and structured in bullet points.
             - Generate the response ‘reflection’ in between two <reflection> tags.
 
-            ### INPUT:\n### Tables:\n{tables}\n### Reflection:\n{reflection}\n### OUTPUT:
+            ### INPUT:\n### Tables:\n{self.tables}\n### Reflection:\n{reflection_int}\n### OUTPUT:
         """
         # print("---------------------------------------------------------")
         # print(f'Reflection_Verification: {get_llm_response_sys(system_prompt, user_prompt)}')
@@ -66,10 +69,10 @@ class Reflection:
             - The output must be in plain text and structured in bullet points.
             - Generate the response ‘reflection’ in between two <reflection> tags.
 
-            ### INPUT:\n### Tables:\n{tables}\n### Previous Reflection:\n{reflection}\n### Revision Plan:\n{reflection_revision_plan}\n### OUTPUT:
+            ### INPUT:\n### Tables:\n{self.tables}\n### Previous Reflection:\n{reflection_int}\n### Revision Plan:\n{reflection_revision_plan}\n### OUTPUT:
         """
-        # print("---------------------------------------------------------")
-        # print(f'reflection_revision: {get_llm_response_sys(system_prompt, user_prompt)}')
+        print("---------------------------------------------------------")
+        print(f'reflection_revision: {get_llm_response_sys(system_prompt, user_prompt)}')
         return get_llm_response_sys(system_prompt, user_prompt)
 
     def reflection(self):
