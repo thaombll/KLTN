@@ -1,7 +1,7 @@
 from model import gpt
 from model.gpt import get_llm_response_sys
 
-def extract_information(reflection):
+def extract_information(information_table, reflection):
     system_prompt = """
         You are a data verification assistant.
 
