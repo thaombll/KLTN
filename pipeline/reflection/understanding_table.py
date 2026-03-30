@@ -1,6 +1,6 @@
 from model.gpt import get_llm_response_sys
-from baseline.load_data import json2pd
-from pipeline.reflection.read_table import build_table_json
+# from baseline.load_data import json2pd
+# from pipeline.reflection.read_table import build_table_json
 
 def understanding_table(tables):
     system_prompt = """
@@ -65,10 +65,10 @@ def understanding_table(tables):
     """
     return get_llm_response_sys(system_prompt, user_prompt)
 
-if __name__ == "__main__":
-    file_path = "data\\Test\\Tableau\\tableau_test.json"
-    test_df = json2pd(file_path)
-    intention = test_df.iloc[0]["intent"]['0']
-    res = test_df.iloc[0]["paragraph_table_pair"]['1']
-    data = build_table_json(res)
-    print(understanding_table(data))
+# if __name__ == "__main__":
+#     file_path = "data\\Test\\Tableau\\tableau_test.json"
+#     test_df = json2pd(file_path)
+#     intention = test_df.iloc[0]["intent"]['0']
+#     res = test_df.iloc[0]["paragraph_table_pair"]['1']
+#     data = build_table_json(res)
+#     print(understanding_table(data))

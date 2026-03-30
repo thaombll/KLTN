@@ -1,7 +1,5 @@
 import os
-import json
 import pandas as pd
-from baseline.load_data import json2pd
 
 def build_table_json(res, base_path="data/Test/Tableau/tab_003"):
     output = []
@@ -27,10 +25,3 @@ def build_table_json(res, base_path="data/Test/Tableau/tab_003"):
                     "table": df
                 })
     return output
-
-if __name__ == "__main__":
-    file_path = "data\\Test\\Tableau\\tableau_test.json"
-    test_df = json2pd(file_path)
-    res = test_df.iloc[0]["paragraph_table_pair"]['0']
-    data = build_table_json(res)
-    print(data)
