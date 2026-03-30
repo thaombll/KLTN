@@ -1,5 +1,7 @@
-from model import gpt
 from model.gpt import get_llm_response_sys
+from pipeline.reflection.extract_infomation_verified import extract_information
+import pandas as pd
+from baseline.load_data import json2pd
 
 class Reflection:
     def __init__(self, tables):
@@ -77,6 +79,27 @@ class Reflection:
 
     def reflection(self):
         reflection_int = self.initialize_reflection()
-        reflection_revision_plan = self.reflection_verification(reflection_int)
-        final_reflection_int = self.reflection_revision(reflection_int, reflection_revision_plan)
-        return final_reflection_int
+        information_verified = extract_information(reflection_int)
+        print("------------------------------------------------------------")
+        print(f'Reflection: {reflection_int}')
+        print("------------------------------------------------------------")
+        print(f'Information: {information_verified}')
+        print("------------------------------------------------------------")
+        # reflection_revision_plan = self.reflection_verification(reflection_int)
+        # final_reflection_int = self.reflection_revision(reflection_int, reflection_revision_plan)
+        # return final_reflection_int
+        return reflection_int, information_verified
+
+if __name__ == "__main__":
+    file_path = "data\\Test\\Pew\\pew_test.json"
+    test_df = json2pd(file_path)
+    intention = test_df.iloc[0]["intent"]['0']
+    res = test_df.iloc[0]["paragraph_table_pair"]['0']
+    tables = ''
+  
+    for x, item in enumerate(res):
+        tables += f'### Table_{x}:\n{item["table"]}\n'
+
+    reflection_obj = Reflection(tables)
+    reflection_obj.reflection()
+    
