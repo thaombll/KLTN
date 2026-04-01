@@ -6,6 +6,10 @@ from pipeline.reflection.read_table import build_table_json
 from baseline.reflection import Reflection
 from pipeline.reflection.extract_infomation_verified import extract_information
 from pipeline.reflection.generate_query import generation_query
+from pipeline.reflection.run_query import run_query
+from pipeline.reflection.verified_information import verified_information
+from pipeline.reflection.revision_reflection import revision_reflection
+import json
 
 if __name__ == "__main__":
     file_path = "data\\Test\\Tableau\\tableau_test.json"
@@ -18,5 +22,34 @@ if __name__ == "__main__":
     reflection_obj = Reflection(data)
     reflection = reflection_obj.reflection()
     information_verified = extract_information(information_table, reflection)
-    print(generation_query(information_verified, information_table))
+    output = generation_query(information_verified, information_table)
+    print(output)
+
+    output = output.strip()
+    output = output.replace("```json", "").replace("```", "")
+    data = json.loads(output)
+
+    list_claim = []
+    list_query = []
+
+    for item in data:
+        list_claim.append(item["claim"])
+        list_query.append(item["sql"])
+
+    list_output_query = run_query(res, list_query)
+
+    list_feedback = []
+    list_suggest_fix = []
+    reflection_fix = []
+
+    for i in range (len(list_query)):
+        verified = verified_information(information_table, list_claim[i], list_output_query[i])
+        verified = verified.strip()
+        verified = verified.replace("```json", "").replace("```", "")
+        data = json.loads(verified)
+        list_feedback.append(data["feedback"])
+        list_suggest_fix.append(data["suggested_fix"])
+        reflection_fix.append(revision_reflection(reflection, list_claim[i], data["feedback"], data["suggested_fix"]))
+    print(reflection_fix)
+
     

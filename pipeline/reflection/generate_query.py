@@ -15,19 +15,22 @@ def generation_query(information_verified, information_table):
     - You MUST use the EXACT table and columns provided in each claim
     - DO NOT use any column outside the "columns" field of the claim
     - DO NOT invent tables or columns
-    - Each SQL must be executable
+    - Each SQL must be executable in DuckDB
 
     LOGIC RULES:
     - Numerical claims → return exact values for entities mentioned
     - Comparison claims → return both values in the SAME query for comparison
     - Trend claims → return values across time columns (e.g., 2011 vs 2014)
 
-    SQL RULES:
+    SQL RULES (VERY IMPORTANT - FOLLOW EXACTLY):
     - Only use SELECT
-    - Use WHERE to filter entities (e.g., Country = 'Vietnam')
+    - Use WHERE to filter entities (e.g., "Country" = 'Vietnam')
     - Use IN when multiple entities appear
-    - Wrap table names with spaces using backticks: `table name`
-    - Wrap column names with spaces using brackets: [column name]
+    - ALWAYS wrap table names using double quotes: "table name"
+    - ALWAYS wrap column names using double quotes: "column name"
+    - NEVER use square brackets [] 
+    - NEVER use backticks ``
+    - Output must be valid DuckDB SQL
 
     OUTPUT FORMAT (JSON list):
     [
@@ -40,6 +43,7 @@ def generation_query(information_verified, information_table):
 
     Only return JSON. No markdown. No text outside JSON.
     """
+    
     user_prompt = f"""
     Database schema:
     {information_table}
@@ -49,4 +53,5 @@ def generation_query(information_verified, information_table):
 
     Generate SQL queries to verify each claim.
     """
+    
     return get_llm_response_sys(system_prompt, user_prompt)
