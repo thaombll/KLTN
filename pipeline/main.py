@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     list_feedback = []
     list_suggest_fix = []
-    reflection_fix = []
+    reflection_revision = reflection
 
     for i in range (len(list_query)):
         verified = verified_information(information_table, list_claim[i], list_output_query[i])
@@ -49,7 +49,16 @@ if __name__ == "__main__":
         data = json.loads(verified)
         list_feedback.append(data["feedback"])
         list_suggest_fix.append(data["suggested_fix"])
-        reflection_fix.append(revision_reflection(reflection, list_claim[i], data["feedback"], data["suggested_fix"]))
-    print(reflection_fix)
+        reflection_revision = revision_reflection(reflection_revision, list_claim[i], data["feedback"], data["suggested_fix"])
+
+    for i in range(len(list_claim)):
+        print("------------------------------------------------------------------------")
+        print(f'Claim: {list_claim[i]}')
+        print(f'Query: {list_query[i]}')
+        print(f'Feedback: {list_feedback[i]}')
+        print(f'Suggest: {list_suggest_fix[i]}')
+
+    print("------------------------------------------------------------------------")
+    print(reflection_revision)
 
     
