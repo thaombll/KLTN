@@ -98,9 +98,11 @@ if __name__ == "__main__":
     for i in range(len(list_node)):
         for j in range(i + 1, len(list_node)):
             relationship = build_relationship(list_node[i], list_node[j])
+            print(relationship)
             if relationship != []:
                 list_relationship.append(relationship)
+
     order_sentence = define_outline(list_relationship, list_sentence)
-    
+
     print(outline_revision(order_sentence))
     
