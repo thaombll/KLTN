@@ -25,7 +25,8 @@ if __name__ == "__main__":
     for x, item in enumerate(res):
         tables += f'### Table_{x}:\n{item["table"]}\n'
 
-    # baseline_storytelling(tables, intention)
+    baseline_storytelling(tables, intention)
+    print(baseline_storytelling)
 
     # file_path = "data\\Test\\Tableau\\tableau_test.json"
 
@@ -35,5 +36,5 @@ if __name__ == "__main__":
 
     # print("--------------------------------------------------------")
     # print(f'Intention: {intention}')
-    print("--------------------------------------------------------")
-    print(f'Table: \n {tables}')
+    # print("--------------------------------------------------------")
+    # print(f'Table: \n {tables}')

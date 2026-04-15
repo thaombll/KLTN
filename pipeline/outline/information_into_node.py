@@ -14,7 +14,6 @@ def information_into_node(result):
     - measure (mi): the metric (e.g., profit, discount, growth)
     - aggregation (agg): sum, avg, count, etc.
     - space (si): condition or filter (e.g., countries with negative profit)
-    - focus (xi): important entity/entities
     - text: the original sentence
 
     STRICT RULES:

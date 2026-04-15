@@ -13,6 +13,8 @@ from pipeline.reflection.revision_reflection import revision_reflection
 from pipeline.outline.extract_information import extract_reflection
 from pipeline.outline.information_into_node import information_into_node
 from pipeline.outline.relationship_node import build_relationship
+from pipeline.outline.define_outline import define_outline
+from pipeline.outline.outline import outline_revision
 import json
 
 if __name__ == "__main__":
@@ -30,7 +32,7 @@ if __name__ == "__main__":
 
     file_path = "data\\Test\\Tableau\\tableau_test.json"
     test_df = json2pd(file_path)
-    intention = test_df.iloc[0]["intent"]['0']
+    intention = test_df.iloc[0]["intent"]['1']
     res = test_df.iloc[0]["paragraph_table_pair"]['1']
     print(res)
 
@@ -78,22 +80,27 @@ if __name__ == "__main__":
     print("------------------------------------------------------------------------")
     print(reflection_revision)
 
-    result = extract_reflection(reflection_revision)
+    list_sentence = extract_reflection(reflection_revision)
     print("------------------------------------------------------------------------")
     print ("Result to node")
+
     list_node = []
-    for i in range(len(result)):
-        a = information_into_node(result[i])
+    for i in range(len(list_sentence)):
+        a = information_into_node(list_sentence[i])
         print(a)
-        print(result[i])
+        print(list_sentence[i])
         list_node.append(a)
 
-    print("------------------------------------------------------------------------")
-    print("Relationship node: ")
+    # print("------------------------------------------------------------------------")
+    # print("Relationship node: ")
+
+    list_relationship = []
     for i in range(len(list_node)):
         for j in range(i + 1, len(list_node)):
-            result = build_relationship(list_node[i], list_node[j])
-
-            print(result)
-
+            relationship = build_relationship(list_node[i], list_node[j])
+            if relationship != []:
+                list_relationship.append(relationship)
+    order_sentence = define_outline(list_relationship, list_sentence)
+    
+    print(outline_revision(order_sentence))
     
