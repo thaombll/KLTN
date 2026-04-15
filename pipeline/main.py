@@ -9,13 +9,30 @@ from pipeline.reflection.generate_query import generation_query
 from pipeline.reflection.run_query import run_query
 from pipeline.reflection.verified_information import verified_information
 from pipeline.reflection.revision_reflection import revision_reflection
+
+from pipeline.outline.extract_information import extract_reflection
+from pipeline.outline.information_into_node import information_into_node
+from pipeline.outline.relationship_node import build_relationship
 import json
 
 if __name__ == "__main__":
+    # file_path = "data\\Test\\Pew\\pew_test.json"
+    # test_df = json2pd(file_path)
+    # intention = test_df.iloc[0]["intent"]['0']
+    # res = test_df.iloc[0]["paragraph_table_pair"]['1']
+    # tables = ''
+    # for x, item in enumerate(res):
+    #     tables += f'### Table_{x}:\n{item["paragraph"]}\n'
+
+    # print(tables)
+
+    # print(f'Res: {res}')
+
     file_path = "data\\Test\\Tableau\\tableau_test.json"
     test_df = json2pd(file_path)
     intention = test_df.iloc[0]["intent"]['0']
     res = test_df.iloc[0]["paragraph_table_pair"]['1']
+    print(res)
 
     data = build_table_json(res)
     information_table = understanding_table(data)
@@ -60,5 +77,23 @@ if __name__ == "__main__":
 
     print("------------------------------------------------------------------------")
     print(reflection_revision)
+
+    result = extract_reflection(reflection_revision)
+    print("------------------------------------------------------------------------")
+    print ("Result to node")
+    list_node = []
+    for i in range(len(result)):
+        a = information_into_node(result[i])
+        print(a)
+        print(result[i])
+        list_node.append(a)
+
+    print("------------------------------------------------------------------------")
+    print("Relationship node: ")
+    for i in range(len(list_node)):
+        for j in range(i + 1, len(list_node)):
+            result = build_relationship(list_node[i], list_node[j])
+
+            print(result)
 
     
