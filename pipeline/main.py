@@ -1,5 +1,8 @@
 from model import gpt
 from model.gpt import get_llm_response_sys
+from model.clean_json import parse_llm_output
+from model.clean_json import llm_output_to_df
+
 from pipeline.reflection.understanding_table import understanding_table
 from baseline.load_data import json2pd
 from pipeline.reflection.read_table import build_table_json
@@ -15,6 +18,11 @@ from pipeline.outline.information_into_node import information_into_node
 from pipeline.outline.relationship_node import build_relationship
 from pipeline.outline.define_outline import define_outline
 from pipeline.outline.outline import outline_revision
+
+from pipeline.narration.map_plot import map_plot
+from pipeline.narration.template_code_plot import plot
+from pipeline.narration.explanable_plot import explanable_plot
+
 import json
 
 if __name__ == "__main__":
@@ -30,13 +38,14 @@ if __name__ == "__main__":
 
     # print(f'Res: {res}')
 
-    # file_path = "data\\Test\\Tableau\\tableau_test.json"
-    # test_df = json2pd(file_path)
-    # intention = test_df.iloc[0]["intent"]['1']
-    # res = test_df.iloc[0]["paragraph_table_pair"]['1']
+    file_path = "data\\Test\\Tableau\\tableau_test.json"
+    test_df = json2pd(file_path)
+    intention = test_df.iloc[0]["intent"]['1']
+    res = test_df.iloc[0]["paragraph_table_pair"]['1']
     # print(res)
 
-    # data = build_table_json(res)
+    data = build_table_json(res)
+    print(data)
     # information_table = understanding_table(data)
     # reflection_obj = Reflection(data)
     # reflection = reflection_obj.reflection()
@@ -105,53 +114,72 @@ if __name__ == "__main__":
     # order_sentence = define_outline(list_relationship, list_sentence)
 
     # print(outline_revision(order_sentence))
-    outline = f"""[
-    {
-        "section_title": "Profitability Overview",
-        "sentences": [
-            "A wide range of profitability is exhibited across countries, with some experiencing significant losses, such as Argentina (18,694) and Turkey (98,447).",
-            "By contrast, several countries demonstrate positive totals, notable examples being Algeria (9,107) and Angola (6,495)."
-        ]
-    },
-    {
-        "section_title": "Influence of Discount Strategies",
-        "sentences": [
-            "The data strongly suggests a relationship between discount rates and profit margins.",
-            "Notable correlation between high discount rates and negative profits, primarily in countries like Nigeria and Zimbabwe, both experiencing the highest discount level, represented numerically as '1'.",
-            "Countries with positive profits show no evidence of discounts, suggesting a direct impact of discounts on profitability.",
-            "Countries with high discounts face greater sustained losses, indicating a likely causal relationship."
-        ]
-    },
-    {
-        "section_title": "Geographical and Market-Specific Nuances",
-        "sentences": [
-            "The variation suggests geographic or marketspecific nuances influencing the profitability, with nearly half of the countries facing negative profits.",
-            "Different countries exhibit varying responses to discount strategies, suggesting market-specific analyses are necessary.",
-            "Some countries maintain profitability without discounts, perhaps indicative of different market dynamics or consumer behavior."
-        ]
-    },
-    {
-        "section_title": "Implications of Declining Trends",
-        "sentences": [
-            "Persistent yearoveryear declines in profitability for many countries, such as Nigeria and Turkey, indicate a systemic issue.",
-            "The trend of increasing losses over time aligns with ongoing and perhaps more aggressive discount offers, exacerbating profitability issues.",
-            "Data indicates that negative profit countries do not experience faster growth than those with positive profits, challenging any assumptions that discounts spur growth.",
-            "Percentage growth rates in both categories fluctuate considerably, with no apparent advantage in high discount regions."
-        ]
-    },
-    {
-        "section_title": "Strategic Recommendations",
-        "sentences": [
-            "These insights highlight a need to evaluate discount strategies as they appear detrimental in many regions.",
-            "While some countries manage to remain profitable without such discounts, others are trapped in burgeoning losses, signaling a need for tailored strategies.",
-            "Strategic overhaul in discount offerings may help reverse negative trends observed consistently over the years.",
-            "The data narrates a cautionary tale of the adverse impacts of aggressive discount strategies on profit margins."
-        ]
-    },
-    {
-        "section_title": "Critical Regions Needing Attention",
-        "sentences": [
-            "Argentina and Turkey stand out with the highest negative profits, indicating urgent attention required in these regions."
-        ]
-    }
-]"""
+    outline = """[
+        {
+            "section_title": "Profitability Overview",
+            "sentences": [
+                "A wide range of profitability is exhibited across countries, with some experiencing significant losses, such as Argentina (18,694) and Turkey (98,447).",
+                "By contrast, several countries demonstrate positive totals, notable examples being Algeria (9,107) and Angola (6,495)."
+            ]
+        },
+        {
+            "section_title": "Influence of Discount Strategies",
+            "sentences": [
+                "The data strongly suggests a relationship between discount rates and profit margins.",
+                "Notable correlation between high discount rates and negative profits, primarily in countries like Nigeria and Zimbabwe, both experiencing the highest discount level, represented numerically as '1'.",
+                "Countries with positive profits show no evidence of discounts, suggesting a direct impact of discounts on profitability.",
+                "Countries with high discounts face greater sustained losses, indicating a likely causal relationship."
+            ]
+        },
+        {
+            "section_title": "Geographical and Market-Specific Nuances",
+            "sentences": [
+                "The variation suggests geographic or marketspecific nuances influencing the profitability, with nearly half of the countries facing negative profits.",
+                "Different countries exhibit varying responses to discount strategies, suggesting market-specific analyses are necessary.",
+                "Some countries maintain profitability without discounts, perhaps indicative of different market dynamics or consumer behavior."
+            ]
+        },
+        {
+            "section_title": "Implications of Declining Trends",
+            "sentences": [
+                "Persistent yearoveryear declines in profitability for many countries, such as Nigeria and Turkey, indicate a systemic issue.",
+                "The trend of increasing losses over time aligns with ongoing and perhaps more aggressive discount offers, exacerbating profitability issues.",
+                "Data indicates that negative profit countries do not experience faster growth than those with positive profits, challenging any assumptions that discounts spur growth.",
+                "Percentage growth rates in both categories fluctuate considerably, with no apparent advantage in high discount regions."
+            ]
+        },
+        {
+            "section_title": "Strategic Recommendations",
+            "sentences": [
+                "These insights highlight a need to evaluate discount strategies as they appear detrimental in many regions.",
+                "While some countries manage to remain profitable without such discounts, others are trapped in burgeoning losses, signaling a need for tailored strategies.",
+                "Strategic overhaul in discount offerings may help reverse negative trends observed consistently over the years.",
+                "The data narrates a cautionary tale of the adverse impacts of aggressive discount strategies on profit margins."
+            ]
+        },
+        {
+            "section_title": "Critical Regions Needing Attention",
+            "sentences": [
+                "Argentina and Turkey stand out with the highest negative profits, indicating urgent attention required in these regions."
+            ]
+        }
+    ]"""
+    print(map_plot(outline, data))
+    list_plot = map_plot(outline, data)
+
+    data = parse_llm_output(list_plot)
+    df = llm_output_to_df(data)
+
+    df = plot(df)
+
+    explain_plot = []
+    for i in range(len(df)):
+        path_plot = df.iloc[i]["plot_path"]
+        if isinstance(path_plot, str): 
+            explain_plot.append(explanable_plot(path_plot))
+        else:
+            explain_plot.append("")
+
+    df["explanable_plot"] = explain_plot
+
+    print(df.head())
