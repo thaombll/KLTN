@@ -73,9 +73,7 @@ class Outline:
 
             ### INPUT:\n### Tables:\n{self.tables}\n### Previous Outline:\n{outline_int}\n### Revision Plan:\n{outline_int_revision_plan}\n### OUTPUT:
             """
-
-        print("---------------------------------------------------------")
-        print(f'outline_revision: {get_llm_response_sys(system_prompt, user_prompt)}')
+            
         return get_llm_response_sys(system_prompt, user_prompt)
 
     def outline(self):

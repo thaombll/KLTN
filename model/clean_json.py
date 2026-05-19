@@ -15,14 +15,36 @@ def parse_llm_output(output_str):
     clean_str = clean_llm_json(output_str)
     
     try:
-        data = json.loads(clean_str)
-    except json.JSONDecodeError as e:
+        return json.loads(clean_str)
+    except json.JSONDecodeError:
         print("JSON lỗi, thử fix nhẹ...")
+    
+    try:
+        # Fix trailing comma
         clean_str = re.sub(r",\s*}", "}", clean_str)
         clean_str = re.sub(r",\s*]", "]", clean_str)
-        data = json.loads(clean_str)
+        return json.loads(clean_str)
+    except json.JSONDecodeError:
+        print("JSON lỗi, thử fix mạnh hơn...")
+    
+    try:
+        # Fix single quotes
+        clean_str = clean_str.replace("'", '"')
+        return json.loads(clean_str)
+    except json.JSONDecodeError:
+        pass
 
-    return data
+    try:
+        # Dùng ast
+        import ast
+        return ast.literal_eval(clean_str)
+    except:
+        pass
+
+    # In ra để debug
+    lines = clean_str.split('\n')
+    print(f"Lỗi gần line 78:\n{''.join(lines[75:80])}")
+    raise ValueError(f"Cannot parse JSON:\n{clean_str[:500]}")
 
 def llm_output_to_df(data):
     rows = []

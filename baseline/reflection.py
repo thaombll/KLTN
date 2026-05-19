@@ -77,16 +77,10 @@ class Reflection:
 
     def reflection(self):
         reflection_int = self.initialize_reflection()
-        # information_verified = extract_information(reflection_int)
-        print("------------------------------------------------------------")
-        print(f'Reflection: {reflection_int}')
-        print("------------------------------------------------------------")
-        # print(f'Information: {information_verified}')
-        # print("------------------------------------------------------------")
-        # reflection_revision_plan = self.reflection_verification(reflection_int)
-        # final_reflection_int = self.reflection_revision(reflection_int, reflection_revision_plan)
-        # return final_reflection_int
-        return reflection_int
+        reflection_revision_plan = self.reflection_verification(reflection_int)
+        final_reflection_int = self.reflection_revision(reflection_int, reflection_revision_plan)
+        return final_reflection_int
+        # return reflection_int
 
 # if __name__ == "__main__":
 #     file_path = "data\\Test\\Pew\\pew_test.json"

@@ -1,12 +1,22 @@
 from model.get_llm_response import get_llm_response
+from model import gpt
+from model.gpt import get_llm_response_sys
+import pandas as pd
+import os
 
-def evaluation (intention, information_table, story_a, story_b):
-    prompt = f"""
+def evaluation (intention, tables, story_a, story_b):
+    system_prompt = f"""
+    You are an expert evaluator for data-driven storytelling.
+    Your task is to compare two stories generated from the same data and intention.
+    You must evaluate objectively based on specific criteria.
+    """
+
+    user_prompt = f"""
     ### Task Description:
     You will receive:
     - A user intention representing the overarching theme of the story
-    - Information about data tables used to generate the data story
-    - Two model-generated stories
+    - Tables data used to generate the stories
+    - Two model-generated stories (Story A and Story B)
     Ignore any extra white spaces and newlines in the stories. Your task is to evaluate the quality
     of the LLM-generated stories based on the criteria listed below:
     ### Evaluation Criteria:
@@ -22,6 +32,7 @@ def evaluation (intention, information_table, story_a, story_b):
     provide important insights, and follow the `intention` provided by the user.
     5. **Factual Correctness:** The accuracy of the data and information presented considering the
     input data tables.
+
     ### Point Allocation Criteria:
     1. For each evaluation criterion, give 1 point to 'Story A' if it is better than 'Story B', or
     vice versa.
@@ -44,11 +55,11 @@ def evaluation (intention, information_table, story_a, story_b):
     
     ### INPUT:
     {intention}
-    ### Information table:
-    {information_table}
+    ### Tables data:
+    {tables}
     ### Story A:
     {story_a}
     ### Story B:
     {story_b}
     """
-    return get_llm_response(prompt)
+    return get_llm_response_sys(system_prompt, user_prompt)
