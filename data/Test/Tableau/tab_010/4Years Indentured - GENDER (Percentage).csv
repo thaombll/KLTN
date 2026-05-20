@@ -1,0 +1,60 @@
+Gender,Runaway,Bound As,Total Years Indentured (bin),Number of Records,% of Total
+Female,FALSE,Servant,< 1,14,0.96%
+Female,FALSE,Servant,1.3,70,4.82%
+Female,FALSE,Servant,2.6,227,15.64%
+Female,FALSE,Servant,3.9,581,40.04%
+Female,FALSE,Servant,5.2,108,7.44%
+Female,FALSE,Servant,6.5,88,6.06%
+Female,FALSE,Servant,7.8,47,3.24%
+Female,FALSE,Servant,9.1,23,1.59%
+Female,FALSE,Apprentice,< 1,4,0.28%
+Female,FALSE,Apprentice,1.3,13,0.90%
+Female,FALSE,Apprentice,2.6,22,1.52%
+Female,FALSE,Apprentice,3.9,33,2.27%
+Female,FALSE,Apprentice,5.2,28,1.93%
+Female,FALSE,Apprentice,6.5,28,1.93%
+Female,FALSE,Apprentice,7.8,40,2.76%
+Female,FALSE,Apprentice,9.1,30,2.07%
+Female,TRUE,Servant,11.7,13,0.90%
+Female,TRUE,Servant,13,5,0.34%
+Female,TRUE,Servant,14.3,1,0.07%
+Female,TRUE,Servant,15.6,2,0.14%
+Female,TRUE,Servant,16.9,1,0.07%
+Female,TRUE,Servant,19.5,1,0.07%
+Female,TRUE,Apprentice,11.7,13,0.90%
+Female,TRUE,Apprentice,13,16,1.10%
+Female,TRUE,Apprentice,14.3,3,0.21%
+Female,TRUE,Apprentice,16.9,1,0.07%
+Female,*,Servant,10.4,12,0.83%
+Female,*,Apprentice,10.4,27,1.86%
+Male,FALSE,Servant,< 1,119,3.24%
+Male,FALSE,Servant,1.3,342,9.32%
+Male,FALSE,Servant,2.6,616,16.78%
+Male,FALSE,Servant,3.9,1079,29.40%
+Male,FALSE,Servant,5.2,213,5.80%
+Male,FALSE,Servant,6.5,150,4.09%
+Male,FALSE,Servant,7.8,97,2.64%
+Male,FALSE,Servant,9.1,31,0.84%
+Male,FALSE,Apprentice,< 1,29,0.79%
+Male,FALSE,Apprentice,1.3,48,1.31%
+Male,FALSE,Apprentice,2.6,107,2.92%
+Male,FALSE,Apprentice,3.9,217,5.91%
+Male,FALSE,Apprentice,5.2,163,4.44%
+Male,FALSE,Apprentice,6.5,144,3.92%
+Male,FALSE,Apprentice,7.8,76,2.07%
+Male,FALSE,Apprentice,9.1,36,0.98%
+Male,TRUE,Servant,11.7,12,0.33%
+Male,TRUE,Servant,13,22,0.60%
+Male,TRUE,Servant,14.3,7,0.19%
+Male,TRUE,Servant,15.6,1,0.03%
+Male,TRUE,Servant,16.9,7,0.19%
+Male,TRUE,Servant,18.2,2,0.05%
+Male,TRUE,Apprentice,11.7,26,0.71%
+Male,TRUE,Apprentice,13,34,0.93%
+Male,TRUE,Apprentice,14.3,17,0.46%
+Male,TRUE,Apprentice,15.6,6,0.16%
+Male,TRUE,Apprentice,16.9,10,0.27%
+Male,TRUE,Apprentice,18.2,2,0.05%
+Male,TRUE,Apprentice,19.5,1,0.03%
+Male,*,Servant,10.4,21,0.57%
+Male,*,Apprentice,10.4,35,0.95%

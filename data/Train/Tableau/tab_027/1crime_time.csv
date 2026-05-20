@@ -1,0 +1,13 @@
+crime,Variable,metric,2013,2014,2015,2016,2017
+Violent crime,Violent crime,Avg. Count,"10,388","13,900","14,650","14,438","14,815"
+Violent crime,Violent crime,Avg. Pop,"850,282","850,282","850,282","850,282","850,282"
+Violent crime,Violent crime,Avg. Rate,12,16,17,17,17
+Property crime,Property crime,Avg. Count,"38,663","49,229","53,995","50,685","57,116"
+Property crime,Property crime,Avg. Pop,"850,282","850,282","850,282","850,282","850,282"
+Property crime,Property crime,Avg. Rate,45,58,64,60,67
+Drug crime,Drug crime,Avg. Count,"2,827","3,345","2,587","2,544","1,955"
+Drug crime,Drug crime,Avg. Pop,"850,282","850,282","850,282","850,282","850,282"
+Drug crime,Drug crime,Avg. Rate,3,4,3,3,2
+Other crime,Other crime,Avg. Count,"36,236","49,884","50,909","49,244","47,428"
+Other crime,Other crime,Avg. Pop,"850,282","850,282","850,282","850,282","850,282"
+Other crime,Other crime,Avg. Rate,43,59,60,58,56
